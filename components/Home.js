@@ -14,6 +14,7 @@ class Home extends Component {
     }
     
     render() {
+        console.log('.....', this.props.decks);
         this.renderItemList = ({ item, index }) => {
             const { title, questions } = item;
             return (
@@ -21,7 +22,7 @@ class Home extends Component {
                     { backgroundColor: lightgray, padding: 10 }]}>
 
                     <Text style={{ fontSize: 25, color: purple }}>{title}</Text>
-                    <Text style={{ fontSize: 16, color: purple }}>{questions.length} cards</Text>
+                    <Text style={{ fontSize: 16, color: purple }}>{questions?questions.length:0} cards</Text>
                 </View>
             );
         };
@@ -50,16 +51,5 @@ function mapStateToProps(decks) {
         decks
     }
 }
-var styles = StyleSheet.create({
-    headline: {
-        fontWeight: 'bold',
-        fontSize: 18,
-        marginTop: 0,
-        width: 200,
-        height: 80,
-        backgroundColor: 'yellow',
-        justifyContent: 'center',
-        alignItems: 'center',
-    }
-});
+
 export default connect(mapStateToProps)(Home);
