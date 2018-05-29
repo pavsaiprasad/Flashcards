@@ -8,6 +8,7 @@ import { FontAwesome, Ionicons } from '@expo/vector-icons'
 import { Constants } from 'expo'
 import Home from './components/Home'
 import DeckView from './components/DeckView'
+import AddNewCard from './components/AddNewCard'
 import reducer from './reducers'
 import store from './utils/store';
 
@@ -24,7 +25,7 @@ const Tabs = createBottomTabNavigator({
     screen: Home,
     navigationOptions: {
       tabBarLabel: 'Home',
-      tabBarIcon: ({ tintColor }) => <Ionicons name='ios-bookmarks' size={30} color={tintColor} />
+      tabBarIcon: ({ tintColor }) => <Ionicons name='ios-home' size={30} color={tintColor} />
     },
   },
   AddNewDeck: {
@@ -67,6 +68,12 @@ const MainNavigator = createStackNavigator({
       title: 'Deck',
     },
   },
+  AddNewCard: {
+    screen: AddNewCard,
+    navigationOptions: {
+      title: 'New Card',
+    },
+  }
 })
 
 export default class App extends React.Component {

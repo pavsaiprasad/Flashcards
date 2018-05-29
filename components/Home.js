@@ -12,7 +12,7 @@ class Home extends Component {
         fetchDecks()
             .then((decks) => dispatch(receiveDecks(decks)))
     }
-    
+
     render() {
         this.renderItemList = ({ item, index }) => {
             const { title, questions } = item;
@@ -25,12 +25,12 @@ class Home extends Component {
                         })
                     }
                 >
-                <View style={[{ flex: 2}, index % 2 == 0 ? { backgroundColor: lightPurp, padding: 10 } : 
-                    { backgroundColor: lightgray, padding: 10 }]}>
+                    <View style={[{ flex: 2 }, index % 2 == 0 ? { backgroundColor: lightPurp, padding: 10 } :
+                        { backgroundColor: lightgray, padding: 10 }]}>
 
-                    <Text style={{ fontSize: 25, color: purple }}>{title}</Text>
-                    <Text style={{ fontSize: 16, color: purple }}>{questions?questions.length:0} cards</Text>
-                </View>
+                        <Text style={{ fontSize: 25, color: purple }}>{title}</Text>
+                        <Text style={{ fontSize: 16, color: purple }}>{questions ? questions.length : 0} cards</Text>
+                    </View>
                 </TouchableOpacity>
             );
         };
@@ -41,7 +41,7 @@ class Home extends Component {
                 questions: decks[key].questions,
             }));
 
-        const decks = mapsDeckTitleAndQuestions(this.props.decks); 
+        const decks = mapsDeckTitleAndQuestions(this.props.decks);
         return (
             <View>
                 <FlatList
@@ -49,7 +49,7 @@ class Home extends Component {
                     renderItem={this.renderItemList}
                     keyExtractor={item => item.title}
                 />
-            </View>  
+            </View>
         )
     }
 }

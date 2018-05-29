@@ -19,6 +19,11 @@ const DeckView = (props) => {
                     })
                 }>
                 </Button>
+                <Button
+                    title='Add new card'
+                    style={{ padding: 20, color: purple }}
+                    onPress={() => props.navigation.navigate('AddNewCard', { title })}>
+                </Button>
         </View>
     );
 };

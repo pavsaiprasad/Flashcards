@@ -1,4 +1,4 @@
-export const initialDataForDecks ={
+export const dataForDecks ={
     React: {
         title: 'React',
             questions: [
