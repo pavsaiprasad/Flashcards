@@ -1,23 +1,27 @@
-export const RECEIVE_DECKS = 'RECEIVE_DECKS'
-export const ADD_DECK = 'ADD_DECK'
-export const ADD_CARD = 'ADD_CARD';
+import { AsyncStorage } from 'react-native';
+import {
+    getDecks,
+    getDeck
+} from '../utils/api';
 
-export function receiveDecks(decks) {
-    return {
-        type: RECEIVE_DECKS,
-        decks,
+import {
+    GET_DECKS,
+    GET_DECK,
+} from '../utils/types';
+
+
+
+export function fetchDecks() {
+    return (dispatch) => {
+        getDecks().then(data => dispatch({ type: GET_DECKS, payload: data }));
     }
 }
 
-export function addDeck(deck) {
-    return {
-        type: ADD_DECK,
-        deck,
+export function getDeckDetails(deck) {
+    return (dispatch) => {
+        getDeck(deck)
+            .then(cardDeck => {
+                dispatch({ type: GET_DECK, payload: JSON.parse(cardDeck) })
+            });
     }
 }
-
-export const addCard = deck => ({
-    type: ADD_CARD,
-    deck,
-});
-

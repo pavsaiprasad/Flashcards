@@ -1,56 +1,64 @@
-import React, { Component } from 'react';
-import { Alert, View, TextInput, Text, TouchableOpacity, Button } from 'react-native';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import { receiveDecks, addDeck } from '../actions'
-import { purple, white, lightPurp, lightgray } from '../utils/colors'
-import { addNewDeck } from '../utils/api';
+import React from 'react';
+import {
+    Text,
+    View
+} from 'react-native';
+import {
+    Button,
+    Card,
+    FormInput,
+    FormValidationMessage,
+    FormLabel
+} from 'react-native-elements';
+import { saveDeckTitle } from '../utils/api';
 
-class AddNewDeck extends Component {
+
+export default class AddNewDeck extends React.Component {
     state = {
-        title: '',
+        titleText: '',
+        errorMessage: false
     };
 
-    handleOnPress = (payload) => {
-        if (this.state.title.length < 1) {
-            return Alert.alert(
-                'The deck title',
-                'cannot be left blank.',
-                { text: 'OK' },
-                { cancelable: false }
+    handleSubmit = () => {
+        if (this.state.titleText) {
+            const { titleText } = this.state;
+            saveDeckTitle(titleText);
+            this.setState({
+                errorMessage: false,
+                titleText: ''
+            });
+            this.props.navigation.navigate(
+                'DeckView',
+                {
+                    deckKey: titleText,
+                    title: titleText
+                },
             );
+        } else {
+            this.setState({ errorMessage: true })
         }
-        const { dispatch } = this.props
-        const { title } = this.state;
-        
-        this.props.addDeck(payload); 
-        this.props.goBack()
     };
 
     render() {
         return (
             <View>
-                <Text style={{ fontSize: 25, color: purple, paddingBottom: 15 }}>What is the title of your new deck?</Text>
-                <TextInput
-                    style={{ height: 50, borderColor: 'gray', borderWidth: 1}}
-                    placeholder="Deck title"
-                    maxLength={50}
-                    blurOnSubmit
-                    keyboardType="default"
-                    onChangeText={title => this.setState({ title })}
-                />
-                <Button title='Submit' style={{ padding: 20, color:purple}} onPress={() => this.handleOnPress(this.state)}>
-                </Button>
+                <Card title="Add new Deck" >
+                    <FormLabel>What is the title of your new deck?</FormLabel>
+                    <FormInput
+                        onChangeText={titleText => this.setState({ titleText })}
+                        value={this.state.titleText}
+                    />
+                    <FormValidationMessage>
+                        {this.state.errorMessage ? 'Please fill this field' : ''}
+                    </FormValidationMessage>
+                    <Button
+                        title="Submit"
+                        raised
+                        backgroundColor='#292477'
+                        onPress={this.handleSubmit}
+                    />
+                </Card>
             </View>
         );
     }
 }
-
-function mapDispatchToProps(dispatch, { navigation }) {
-    return {
-        addDeck: (deck) => dispatch(addDeck(deck)),
-        goBack: () => navigation.goBack(),
-    }
-}
-
-export default connect(null, mapDispatchToProps)(AddNewDeck);

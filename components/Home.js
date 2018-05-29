@@ -1,63 +1,75 @@
-import React, { Component } from 'react';
-import { FlatList, View, Text, TouchableOpacity, StyleSheet, Header } from 'react-native';
+import React from 'react';
+import {
+    Text,
+    View,
+    FlatList,
+    TouchableOpacity,
+    StyleSheet
+} from 'react-native';
 import { connect } from 'react-redux';
-import { fetchDecks } from '../utils/api';
-import { receiveDecks, addDeck } from '../actions'
-import { RECEIVE_DECKS, ADD_DECK } from '../actions'
+import { Card } from 'react-native-elements';
+import { fetchDecks } from '../actions';
 import { purple, white, lightPurp, lightgray } from '../utils/colors'
 
-class Home extends Component {
+class Home extends React.Component {
     componentDidMount() {
-        const { dispatch } = this.props
-        fetchDecks()
-            .then((decks) => dispatch(receiveDecks(decks)))
+        this.props.fetchDecks();
     }
+
+    componentDidUpdate() {
+        this.props.fetchDecks()
+    }
+
+    renderItem = ({ item, index }) =>
+        <TouchableOpacity
+            onPress={() => this.props.navigation.navigate(
+                'DeckView',
+                {
+                    deckKey: item.key,
+                    title: item.title
+                }
+            )}
+        >
+            <View style={[{ flex: 2 }, index % 2 == 0 ? { backgroundColor: lightPurp, padding: 10 } :
+                { backgroundColor: '#dfecca', padding: 10 }]}>
+                <Card
+                    title={item.title}
+                    subtitle={`${item.questions.length} cards`}>
+                    <Text>
+                        {`${item.questions.length} cards`}
+                    </Text>
+                </Card>
+            </View>
+        </TouchableOpacity>;
+
 
     render() {
-        this.renderItemList = ({ item, index }) => {
-            const { title, questions } = item;
-            return (
-                <TouchableOpacity
-                    onPress={() =>
-                        this.props.navigation.navigate('DeckView', {
-                            title,
-                            questions,
-                        })
-                    }
-                >
-                    <View style={[{ flex: 2 }, index % 2 == 0 ? { backgroundColor: lightPurp, padding: 10 } :
-                        { backgroundColor: lightgray, padding: 10 }]}>
-
-                        <Text style={{ fontSize: 25, color: purple }}>{title}</Text>
-                        <Text style={{ fontSize: 16, color: purple }}>{questions ? questions.length : 0} cards</Text>
-                    </View>
-                </TouchableOpacity>
-            );
-        };
-
-        mapsDeckTitleAndQuestions = (decks) =>
-            Object.keys(decks).map(key => ({
-                title: decks[key].title,
-                questions: decks[key].questions,
-            }));
-
-        const decks = mapsDeckTitleAndQuestions(this.props.decks);
         return (
-            <View>
-                <FlatList
-                    data={decks}
-                    renderItem={this.renderItemList}
-                    keyExtractor={item => item.title}
-                />
+            <View style={styles.container}>
+                {this.props.decks.length > 0
+                    ?
+                    <FlatList
+                        data={this.props.decks}
+                        renderItem={this.renderItem}
+                    />
+                    : <Card title="Click on the Add Deck tab to get started" />
+                }
             </View>
-        )
+        );
     }
 }
 
-function mapStateToProps(decks) {
-    return {
-        decks
+const styles = StyleSheet.create({
+    container: {
+        flex: 1
     }
-}
+})
 
-export default connect(mapStateToProps)(Home);
+const mapStateToProps = state => {
+    return { 
+        decks : state.decks 
+    };
+};
+
+export default connect(mapStateToProps, { fetchDecks })(Home);
+
