@@ -14,7 +14,6 @@ class Home extends Component {
     }
     
     render() {
-        console.log('.....', this.props.decks);
         this.renderItemList = ({ item, index }) => {
             const { title, questions } = item;
             return (

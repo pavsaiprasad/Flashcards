@@ -15,7 +15,7 @@ class AddNewDeck extends Component {
     handleOnPress = (payload) => {
         if (this.state.title.length < 1) {
             return Alert.alert(
-                'Your question',
+                'The deck title',
                 'cannot be left blank.',
                 { text: 'OK' },
                 { cancelable: false }
@@ -23,8 +23,9 @@ class AddNewDeck extends Component {
         }
         const { dispatch } = this.props
         const { title } = this.state;
-        addNewDeck(payload)
-            .then((deck) => {this.props.addDeck(decks); this.props.goBack()})
+        
+        this.props.addDeck(payload); 
+        this.props.goBack()
     };
 
     render() {
