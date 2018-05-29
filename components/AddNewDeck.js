@@ -3,7 +3,6 @@ import { Alert, View, TextInput, Text, TouchableOpacity, Button } from 'react-na
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { receiveDecks, addDeck } from '../actions'
-import TextButton from './TextButton'
 import { purple, white, lightPurp, lightgray } from '../utils/colors'
 import { addNewDeck } from '../utils/api';
 

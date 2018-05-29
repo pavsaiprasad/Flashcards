@@ -17,12 +17,21 @@ class Home extends Component {
         this.renderItemList = ({ item, index }) => {
             const { title, questions } = item;
             return (
+                <TouchableOpacity
+                    onPress={() =>
+                        this.props.navigation.navigate('DeckView', {
+                            title,
+                            questions,
+                        })
+                    }
+                >
                 <View style={[{ flex: 2}, index % 2 == 0 ? { backgroundColor: lightPurp, padding: 10 } : 
                     { backgroundColor: lightgray, padding: 10 }]}>
 
                     <Text style={{ fontSize: 25, color: purple }}>{title}</Text>
                     <Text style={{ fontSize: 16, color: purple }}>{questions?questions.length:0} cards</Text>
                 </View>
+                </TouchableOpacity>
             );
         };
 

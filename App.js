@@ -7,6 +7,7 @@ import { purple, white } from './utils/colors'
 import { FontAwesome, Ionicons } from '@expo/vector-icons'
 import { Constants } from 'expo'
 import Home from './components/Home'
+import DeckView from './components/DeckView'
 import reducer from './reducers'
 import store from './utils/store';
 
@@ -56,6 +57,15 @@ const Tabs = createBottomTabNavigator({
 const MainNavigator = createStackNavigator({
   Home: {
     screen: Tabs,
+    navigationOptions: {
+      title: 'Home',
+    },
+  },
+  DeckView: {
+    screen: DeckView,
+    navigationOptions: {
+      title: 'Deck',
+    },
   },
 })
 
