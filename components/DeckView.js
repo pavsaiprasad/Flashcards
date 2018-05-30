@@ -18,6 +18,26 @@ class DeckView extends React.Component {
     componentDidUpdate() {
         this.props.getDeckDetails(this.props.navigation.state.params.deckKey);
     }
+   
+    navigateToAddNewCard() {
+    this.props.navigation.navigate(
+        'AddNewCard',
+        {
+            title: this.props.title
+        }
+        );
+    }
+
+    navigateToQuizView() {
+    this.props.navigation.navigate(
+        'QuizView',
+        {
+            title: this.props.title,
+            questions: this.props.questions
+        }
+    );
+    } 
+
     render() {
         return (
             <View>
@@ -29,29 +49,12 @@ class DeckView extends React.Component {
                         <StyledButton
                             backgroundColor='#292477'
                             title='Add Card'
-                            onPress={() => {
-                                this.props.navigation.navigate(
-                                    'AddNewCard',
-                                    {
-                                        title: this.props.title
-                                    }
-                                );
-                            }
-                            }
+                            onPress={this.navigateToAddNewCard.bind(this)}
                         />
                         <StyledButton
                             backgroundColor='#96C051'
                             title='Start Quiz'
-                            onPress={() => {
-                                this.props.navigation.navigate(
-                                    'QuizView',
-                                    {
-                                        title: this.props.title,
-                                        questions: this.props.questions
-                                    }
-                                );
-                            }
-                            }
+                            onPress={this.navigateToQuizView.bind(this)}
                         />
                     </View>
                 </Card>
