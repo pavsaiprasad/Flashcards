@@ -13,13 +13,7 @@ class QuizView extends React.Component {
         currentQuestion: 0,
         correctAnswers: 0
     };
-
-    static navigationOptions = ({ navigation }) => {
-        return {
-            title: navigation.state.params.title
-        }
-    };
-
+    
     resetQuiz() {
         this.setState(() => {
             return {
