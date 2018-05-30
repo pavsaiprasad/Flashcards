@@ -9,6 +9,7 @@ import { Constants } from 'expo'
 import Home from './components/Home'
 import DeckView from './components/DeckView'
 import AddNewCard from './components/AddNewCard'
+import QuizView from './components/QuizView';
 import reducer from './reducers'
 import store from './utils/store';
 
@@ -68,12 +69,25 @@ const MainNavigator = createStackNavigator({
       title: 'Deck',
     },
   },
+  AddNewDeck: {
+    screen: AddNewDeck,
+    navigationOptions: {
+      title: 'New Deck',
+    },
+  },
   AddNewCard: {
     screen: AddNewCard,
     navigationOptions: {
       title: 'New Card',
     },
-  }
+  },
+  QuizView: {
+    screen: QuizView,
+    navigationOptions: {
+      title: 'Quiz',
+    },
+  },
+  
 })
 
 export default class App extends React.Component {

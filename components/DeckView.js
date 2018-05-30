@@ -38,6 +38,21 @@ class DeckView extends React.Component {
                             }
                             }
                         />
+                        <Button
+                            backgroundColor='#96C051'
+                            buttonStyle={ { marginTop: 10 }}
+                            title='Start Quiz'
+                            onPress={() => {
+                                this.props.navigation.navigate(
+                                    'QuizView',
+                                    {
+                                        title: this.props.title,
+                                        questions: this.props.questions
+                                    }
+                                );
+                            }
+                            }
+                        />
                     </View>
                 </Card>
             </View>
@@ -50,4 +65,4 @@ const mapStateToProps = state => {
     return { title, questions };
 };
 
-export default connect(mapStateToProps, { getDeckDetails})(DeckView);
+export default connect(mapStateToProps, {getDeckDetails})(DeckView);
