@@ -1,24 +1,22 @@
 import { AsyncStorage } from 'react-native';
 
-export function getDecks() {
-    return AsyncStorage.getAllKeys().then(keys => {
-        return AsyncStorage.multiGet(keys).then(stores => {
-            return stores.map((result, index, store) => {
-                let key = store[index][0];
-                let value = JSON.parse(store[index][1]);
-                if (value) {
-                    return {
-                        key,
-                        title: value.title,
-                        questions: value.questions
-                    };
-                }
-            }).filter(items => {
-                if (items) {
-                    return typeof items.questions !== 'undefined'
-                }
-            });
-        });
+export async function getDecks() {
+    const keys = await AsyncStorage.getAllKeys()
+    const stores = await AsyncStorage.multiGet(keys);
+    return stores.map((result, index, store) => {
+        let key = store[index][0];
+        let value = JSON.parse(store[index][1]);
+        if (value) {
+            return {
+                key,
+                title: value.title,
+                questions: value.questions
+            };
+        }
+    }).filter(items => {
+        if (items) {
+            return typeof items.questions !== 'undefined'
+        }
     });
 }
 

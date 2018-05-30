@@ -5,6 +5,7 @@ import {
     Button,
     Card
 } from 'react-native-elements';
+import StyledButton from './StyledButton'
 
 class QuizView extends React.Component {
     state = {
@@ -67,14 +68,12 @@ class QuizView extends React.Component {
                             {`Question ${currentQuestion + 1} of ${questions.length}`}
                         </Text>
                     </View>
-                    <Button
-                        buttonStyle={[{ marginTop: 10 }]}
+                    <StyledButton
                         backgroundColor='#292477'
                         onPress={() => this.setState({ showQuestion: !this.state.showQuestion })}
                         title = {this.state.showQuestion ? "Find out the Answer" : "Next Question"}
                     />
-                    <Button
-                        buttonStyle={[{ marginTop: 10 }]}
+                    <StyledButton
                         title="Got the answer right! 😊"
                         backgroundColor='#377D22'
                         onPress={() => {
@@ -85,8 +84,7 @@ class QuizView extends React.Component {
                             });
                         }}
                     />
-                    <Button
-                        buttonStyle={[ { marginTop: 10 }]}
+                    <StyledButton
                         title="Got it wrong ☹️"
                         backgroundColor='#96C051'
                         onPress={() => this.setState({ 

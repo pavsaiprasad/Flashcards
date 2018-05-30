@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import {
     getDeckDetails,
 } from '../actions';
+import StyledButton from './StyledButton'
 
 class DeckView extends React.Component {
     componentDidMount() {
@@ -25,7 +26,7 @@ class DeckView extends React.Component {
                         {this.props.questions ? this.props.questions.length : 0} cards
                     </Text>
                     <View>
-                        <Button
+                        <StyledButton
                             backgroundColor='#292477'
                             title='Add Card'
                             onPress={() => {
@@ -38,9 +39,8 @@ class DeckView extends React.Component {
                             }
                             }
                         />
-                        <Button
+                        <StyledButton
                             backgroundColor='#96C051'
-                            buttonStyle={ { marginTop: 10 }}
                             title='Start Quiz'
                             onPress={() => {
                                 this.props.navigation.navigate(

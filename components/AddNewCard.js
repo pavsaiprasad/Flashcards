@@ -8,7 +8,7 @@ import {
     FormValidationMessage
 } from 'react-native-elements';
 import { addCardToDeck } from '../utils/api';
-
+import StyledButton from './StyledButton'
 
 class AddNewCard extends React.Component {
     state = {
@@ -58,7 +58,7 @@ class AddNewCard extends React.Component {
                     <FormValidationMessage>
                         {this.state.errorMessage ? 'Please fill all the fields' : ''}
                     </FormValidationMessage>
-                    <Button
+                    <StyledButton
                         title="Submit"
                         raised
                         backgroundColor='#292477'

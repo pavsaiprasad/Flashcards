@@ -11,7 +11,7 @@ import {
     FormLabel
 } from 'react-native-elements';
 import { saveDeckTitle } from '../utils/api';
-
+import StyledButton from './StyledButton'
 
 export default class AddNewDeck extends React.Component {
     state = {
@@ -51,7 +51,7 @@ export default class AddNewDeck extends React.Component {
                     <FormValidationMessage>
                         {this.state.errorMessage ? 'Please fill this field' : ''}
                     </FormValidationMessage>
-                    <Button
+                    <StyledButton
                         title="Submit"
                         raised
                         backgroundColor='#292477'
