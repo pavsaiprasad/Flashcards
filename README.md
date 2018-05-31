@@ -1,5 +1,5 @@
 # Flashcards
-An iOS app written using React Native and Expo and allows users to study collections of flashcards by creating decks of quizzes
+An iOS app written using React Native and Expo, that allows users to study collections of flashcards by creating decks of quizzes
 
 ## Get started
 Prerequisites
