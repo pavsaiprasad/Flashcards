@@ -28,7 +28,7 @@ class QuizView extends React.Component {
         this.resetNotification()
     }
 
-    clearNotification() {
+    resetNotification() {
         clearLocalNotification()
       .then(setLocalNotification);
     }
