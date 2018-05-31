@@ -12,6 +12,7 @@ import AddNewCard from './components/AddNewCard'
 import QuizView from './components/QuizView';
 import reducer from './reducers'
 import store from './utils/store';
+import { setLocalNotification } from './utils/notification-helper';
 
 function Status({ backgroundColor, ...props }) {
   return (
@@ -91,6 +92,9 @@ const MainNavigator = createStackNavigator({
 })
 
 export default class App extends React.Component {
+  componentDidMount() {
+    setLocalNotification();
+  }
   render() {
     return (
       <Provider store={store}>

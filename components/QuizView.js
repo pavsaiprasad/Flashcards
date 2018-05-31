@@ -6,6 +6,7 @@ import {
     Card
 } from 'react-native-elements';
 import StyledButton from './StyledButton'
+import {clearLocalNotification, setLocalNotification } from '../utils/notification-helper';
 
 class QuizView extends React.Component {
     state = {
@@ -24,12 +25,19 @@ class QuizView extends React.Component {
                 correctAnswers: 0
             }
         });
+        this.resetNotification()
+    }
+
+    clearNotification() {
+        clearLocalNotification()
+      .then(setLocalNotification);
     }
 
     backToDeck() {
         const backAction = NavigationActions.back();
         this.resetQuiz();
         this.props.navigation.dispatch(backAction);
+        this.resetNotification()
     }
 
     shuffleQuestions() {
@@ -98,13 +106,12 @@ class QuizView extends React.Component {
             <Card
                 title={`You got ${correctAnswers} out of ${questions.length}`}
             >
-                <Button
+                <StyledButton
                     title="Take the quiz again 🔁"
                     backgroundColor='#292477'
                     onPress={() => this.resetQuiz()}
                 />
-                <Button
-                    buttonStyle={[ { marginTop: 10 }]}
+                <StyledButton
                     title="Back to Deck "
                     backgroundColor='#96C051'
                     onPress={() => this.backToDeck()}

@@ -20,19 +20,15 @@ class Home extends React.Component {
         this.props.fetchDecks()
     }
 
-    navigateToDeckView() {
-    this.props.navigation.navigate(
-        'DeckView',
-        {
-            deckKey: item.key,
-            title: item.title
-        }
-    );
-    } 
-
     renderItem = ({ item, index }) =>
         <TouchableOpacity
-            onPress={this.navigateToDeckView.bind(this)}
+            onPress={() => this.props.navigation.navigate(
+                'DeckView',
+                {
+                    deckKey: item.key,
+                    title: item.title
+                }
+            )}
         >
             <View style={[{ flex: 2 }, index % 2 == 0 ? { backgroundColor: lightPurp, padding: 10 } :
                 { backgroundColor: '#dfecca', padding: 10 }]}>
